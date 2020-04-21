@@ -15,11 +15,11 @@ def register(request):
         password2 = request.POST['password2']
 
         # Check if both passwords match
-        if password != password2:
-            messages.error(request, 'Passwords do not match')
-            return redirect('register')
-        else:
-            flag1 = True
+        # if password != password2:
+        #     messages.error(request, 'Passwords do not match')
+        #     return redirect('register')
+        # else:
+        #     flag1 = True
 
             # Check if username is unique
         if User.objects.filter(username = username).exists():
@@ -35,7 +35,7 @@ def register(request):
             flag3 = True
 
         # No error, all good
-        if flag1 & flag2 & flag3:
+        if flag2 & flag3:
             user = User.objects.create_user(username = username,email = email,password= password, first_name= first_name, last_name= last_name)
             user.save()
             messages.success(request, 'User registration successfull! Now you can login with your credentials')
